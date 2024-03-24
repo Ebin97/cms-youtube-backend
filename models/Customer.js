@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
 
-const ContactSchema = new mongoose.Schema({
+const CustomerSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, "name is required."],
@@ -24,9 +24,9 @@ const ContactSchema = new mongoose.Schema({
   },
 });
 
-const Contact = new mongoose.model("Contact", ContactSchema);
+const Customer = new mongoose.model("Customer", CustomerSchema);
 
-const validateContact = (data) => {
+const validateCustomer = (data) => {
   const schema = Joi.object({
     name: Joi.string().min(4).max(50).required(),
     address: Joi.string().min(4).max(100).required(),
@@ -38,6 +38,6 @@ const validateContact = (data) => {
 };
 
 module.exports = {
-  validateContact,
-  Contact,
+  validateCustomer,
+  Customer,
 };

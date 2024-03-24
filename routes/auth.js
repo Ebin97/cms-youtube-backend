@@ -30,10 +30,13 @@ router.post("/register", async (req, res) => {
       .json({ error: "please enter a valid email address." });
 
   // validation of password.
-  if (password.length < 6)
+  const passwordReg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+
+  if (!passwordReg.test(password)) {
     return res
-      .status(400)
-      .json({ error: "password must be atleast 6 characters long" });
+    .status(400)
+    .json({ error: "Password must contain at least one uppercase letter, one lowercase letter, one digit, one special character, and must be at least 8 characters long" });
+  }
   try {
     const doesUserAlreadyExist = await User.findOne({ email });
 
